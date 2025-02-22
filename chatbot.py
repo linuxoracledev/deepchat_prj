@@ -1,24 +1,33 @@
-from deepseek import DeepSeek  # Or use any other library you're integrating
-import tensorflow as tf
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+import random
 
-# Initialize the chatbot
-chatbot = DeepSeek()  # Replace this with proper initialization if needed
+def get_response(user_input):
+    # A simple function to generate chatbot responses based on user input
+    user_input = user_input.lower()
 
-def get_response(input_text):
-    """
-    Generate a response from the chatbot based on input text.
-    This function may need to be adjusted based on the Deepseek API.
-    """
-    response = chatbot.generate_response(input_text)  # Adjust based on Deepseek's method
-    return response
+    if 'hello' in user_input:
+        return "Hi there! How can I help you today?"
+    elif 'how are you' in user_input:
+        return "I'm just a chatbot, but I'm doing fine! How about you?"
+    elif 'bye' in user_input:
+        return "Goodbye! Have a great day!"
+    else:
+        return "Sorry, I didn't understand that. Can you rephrase?"
+
+def chatbot():
+    print("Chatbot: Hello! Type 'exit' to end the chat.")
+    
+    while True:
+        # Get user input
+        user_input = input("You: ")
+
+        # Exit condition
+        if user_input.lower() == 'exit':
+            print("Chatbot: Goodbye!")
+            break
+        
+        # Get chatbot response
+        response = get_response(user_input)
+        print(f"Chatbot: {response}")
 
 if __name__ == "__main__":
-    print("Chatbot is ready! Type 'exit' to end the conversation.")
-    while True:
-        user_input = input("You: ")
-        if user_input.lower() == "exit":
-            print("Exiting chatbot...")
-            break
-        response = get_response(user_input)
-        print(f"Bot: {response}")
+    chatbot()
